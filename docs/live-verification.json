@@ -1,0 +1,87 @@
+{
+  "verified": true,
+  "complete_rounds": 89,
+  "time_h": 44.5,
+  "individual_decisions": 8463,
+  "all_decisions": "jev",
+  "exact_replay": true,
+  "antigen_conserved": true,
+  "metrics": {
+    "live": 100,
+    "initial": 100,
+    "net_births": 0,
+    "deaths": 0,
+    "cleared": 0,
+    "gc_b": 16,
+    "tfh": 6,
+    "presenting": 7,
+    "memory": 0,
+    "plasma": 0,
+    "antibodies": 0,
+    "states": {
+      "resting": 20,
+      "presenting": 5,
+      "lz": 8,
+      "dz": 7,
+      "activated": 13,
+      "naive": 36,
+      "selected": 1,
+      "tfh": 6,
+      "pre_tfh": 4
+    },
+    "types": {
+      "LEC": 3,
+      "FDC": 6,
+      "MAC": 6,
+      "DC": 5,
+      "FRC": 5,
+      "B": 46,
+      "CD4": 29
+    },
+    "pools": {
+      "degraded": 126,
+      "surface_pmhc": 7,
+      "fdc_retained": 23,
+      "free_native": 3,
+      "processed_peptide": 1
+    },
+    "antigen_input": 160,
+    "antigen_accounted": 160,
+    "decisions": 8463
+  },
+  "gc_events": [
+    {
+      "time_min": 1350,
+      "event": "germinal_center_formed",
+      "cell": null,
+      "rule": "LN-R013",
+      "evidence": "P",
+      "founders": [
+        "LN-0031",
+        "LN-0032",
+        "LN-0045",
+        "LN-0047"
+      ]
+    }
+  ],
+  "usage": {
+    "configured": true,
+    "model": "jev-1.13.0",
+    "resolved_model": "jev-1.13.0",
+    "requests": 447,
+    "server_limit": 450,
+    "input_tokens": 14237357,
+    "output_tokens": 294834,
+    "unknown_usage": 1,
+    "provider": "jev"
+  },
+  "estimated_known_usd_at_screenshot_rate": 0.597968994,
+  "adjusted_answers": 10,
+  "audit_statuses": {
+    "validated": 435,
+    "validated_after_review": 10,
+    "failed; usage unknown": 1,
+    "rejected_after_review": 1
+  },
+  "recording_sha256": "26988a522655af646cba82edd2779360712fc65479db888cc643436f6ffabd1b"
+}

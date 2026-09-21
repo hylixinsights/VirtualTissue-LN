@@ -1,0 +1,25 @@
+{
+  "release": "0.2.0",
+  "recordings": [
+    {
+      "id": "memory",
+      "title": "Division & memory \u00b7 64 h",
+      "file": "lymph-node-memory.ln.json.gz",
+      "sha256": "d07be097832f8cb33c5802a6aec854a376553ba518898cd58f884f34dc3b0173",
+      "initial_cells": 100,
+      "duration_hours": 64,
+      "decisions": 12284,
+      "provider": "Jev",
+      "model": "jev-1.13.0",
+      "status": "complete",
+      "physical_divisions": 1,
+      "memory_b_cells": 3,
+      "plasma_cells": 0,
+      "policy_revision_hours": 60
+    }
+  ],
+  "disclosure": "Proposed qualitative local-antigen fate rubric introduced at 60 h. Demonstration selected/stopped after division and memory; not calibrated or an unbiased biological estimate. Memory arose in other clones before the recorded division.",
+  "usage_scope": "Episode usage is cumulative across common prefix, comparison and final demonstration; it is not replay cost. Off-trajectory requests are identified in branch_provenance.",
+  "known_project_cost_usd": 1.086105594,
+  "unknown_usage_requests": 1
+}

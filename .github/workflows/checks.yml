@@ -1,0 +1,28 @@
+name: Verify lymph-node release
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m unittest discover -s tests -q
+      - run: python scripts/build_site.py
+      - run: npm install --no-save playwright
+      - run: npx playwright install --with-deps chromium
+      - name: Test static replay without inference
+        run: |
+          python -m http.server 8020 --bind 127.0.0.1 --directory site &
+          node tests/browser_static.mjs
+      - run: python scripts/package_release.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lymph-node-static-site
+          path: dist/VirtualTissue-LN-0.2.0-site.zip

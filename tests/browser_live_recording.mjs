@@ -1,0 +1,15 @@
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+import {fileURLToPath} from 'node:url';
+const root=fileURLToPath(new URL('../',import.meta.url));
+const browser=await chromium.launch({channel:'chrome',headless:true});
+const page=await browser.newPage({viewport:{width:1512,height:982}});const errors=[],writes=[];
+page.on('pageerror',e=>errors.push(String(e)));page.on('request',r=>{if(r.method()==='POST')writes.push(r.url());});
+await page.goto('http://127.0.0.1:8010/?recording=940f891b6407c4a24371');
+await page.locator('#replay').waitFor({state:'visible',timeout:60000});
+if(!(await page.locator('#providerBadge').textContent()).includes('Jev · recorded'))throw Error('Provider label');
+if(await page.locator('#metricLive').textContent()!=='100')throw Error('Initial population');
+if(await page.locator('#diameter').textContent()!=='173.2 μm')throw Error('Compact physical scale');
+const last=await page.locator('#seek').getAttribute('max');await page.locator('#seek').fill(last);await page.locator('#seek').dispatchEvent('input');
+await page.waitForTimeout(500);await page.evaluate(()=>{document.activeElement?.blur();window.scrollTo(0,0);});await page.screenshot({path:root+'docs/jev-real-100.png',fullPage:true});
+console.log({frame:last,time:await page.locator('#time').textContent(),badge:await page.locator('#providerBadge').textContent(),usage:await page.locator('#usage').textContent(),writes,errors});
+if(writes.length||errors.length)throw Error('Playback must be error-free with no inference mutations');await browser.close();

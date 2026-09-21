@@ -1,0 +1,94 @@
+{
+  "verified": true,
+  "complete_rounds": 128,
+  "time_h": 64.0,
+  "individual_decisions": 12284,
+  "all_decisions": "jev",
+  "exact_replay": true,
+  "unchanged_prefix_to_60h": true,
+  "antigen_conserved": true,
+  "daughter_ancestry_verified": true,
+  "metrics": {
+    "live": 99,
+    "initial": 100,
+    "net_births": 1,
+    "deaths": 2,
+    "cleared": 0,
+    "gc_b": 13,
+    "tfh": 7,
+    "presenting": 6,
+    "memory": 3,
+    "plasma": 0,
+    "antibodies": 0,
+    "states": {
+      "resting": 20,
+      "presenting": 5,
+      "lz": 12,
+      "activated": 12,
+      "memory": 3,
+      "naive": 36,
+      "dz": 1,
+      "tfh": 7,
+      "pre_tfh": 3
+    },
+    "types": {
+      "LEC": 3,
+      "FDC": 6,
+      "MAC": 6,
+      "DC": 5,
+      "FRC": 5,
+      "B": 45,
+      "CD4": 29
+    },
+    "pools": {
+      "degraded": 146,
+      "surface_pmhc": 6,
+      "fdc_retained": 8
+    },
+    "antigen_input": 160,
+    "antigen_accounted": 160,
+    "decisions": 12284
+  },
+  "milestones": {
+    "gc": 22.5,
+    "division": 64.0,
+    "memory": 63.0,
+    "plasma": null
+  },
+  "usage_including_comparison": {
+    "configured": true,
+    "model": "jev-1.13.0",
+    "resolved_model": "jev-1.13.0",
+    "requests": 911,
+    "server_limit": 1800,
+    "input_tokens": 25859657,
+    "output_tokens": 596008,
+    "unknown_usage": 1,
+    "provider": "jev"
+  },
+  "estimated_known_usd": 1.086105594,
+  "unknown_request_upper_reserve_usd": 0.0027525120000000004,
+  "global_cap_upper_usd": 4.9545216000000005,
+  "branch_provenance": {
+    "branched_at_round": 120,
+    "branched_at_time_min": 3600,
+    "checkpoint_source": "jev-extended-demo-20260921/checkpoint-60h",
+    "comparison_source": "jev-extended-demo-20260921",
+    "comparison_requests_not_applied_to_this_branch": [
+      603,
+      871
+    ],
+    "budget_scope": "All actual requests from common prefix, comparison and this branch; no cost reset",
+    "decision_policy": "v4 proposed qualitative local-antigen fate rubric; all choices returned by Jev"
+  },
+  "prompt_changes": [
+    {
+      "round": 120,
+      "time_min": 3600,
+      "old": "lymph-node-choice-v2-lossless-tables",
+      "new": "lymph-node-choice-v4-proposed-fate-context",
+      "reason": "Explicitly revised decision context; see versioned prompt definitions. Kernel gates and clocks unchanged."
+    }
+  ],
+  "recording_sha256": "d07be097832f8cb33c5802a6aec854a376553ba518898cd58f884f34dc3b0173"
+}

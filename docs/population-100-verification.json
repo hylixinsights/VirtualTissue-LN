@@ -1,0 +1,193 @@
+{
+  "vaccine": {
+    "live": 103,
+    "initial": 100,
+    "net_births": 3,
+    "deaths": 0,
+    "cleared": 0,
+    "gc_b": 8,
+    "tfh": 2,
+    "presenting": 8,
+    "memory": 0,
+    "plasma": 2,
+    "antibodies": 87,
+    "states": {
+      "resting": 20,
+      "presenting": 5,
+      "activated": 23,
+      "dz": 2,
+      "naive": 40,
+      "plasma": 2,
+      "lz": 6,
+      "pre_tfh": 3,
+      "tfh": 2
+    },
+    "types": {
+      "LEC": 3,
+      "FDC": 6,
+      "MAC": 6,
+      "DC": 5,
+      "FRC": 5,
+      "B": 49,
+      "CD4": 29
+    },
+    "pools": {
+      "degraded": 122,
+      "surface_pmhc": 8,
+      "internalized": 1,
+      "fdc_retained": 21,
+      "native_cargo": 2,
+      "free_native": 6
+    },
+    "antigen_input": 160,
+    "antigen_accounted": 160,
+    "decisions": 0
+  },
+  "baseline": {
+    "live": 100,
+    "initial": 100,
+    "net_births": 0,
+    "deaths": 0,
+    "cleared": 0,
+    "gc_b": 0,
+    "tfh": 0,
+    "presenting": 0,
+    "memory": 0,
+    "plasma": 0,
+    "antibodies": 0,
+    "states": {
+      "resting": 25,
+      "naive": 75
+    },
+    "types": {
+      "LEC": 3,
+      "FDC": 6,
+      "MAC": 6,
+      "DC": 5,
+      "FRC": 5,
+      "B": 46,
+      "CD4": 29
+    },
+    "pools": {},
+    "antigen_input": 0,
+    "antigen_accounted": 0,
+    "decisions": 0
+  },
+  "no_help": {
+    "live": 100,
+    "initial": 100,
+    "net_births": 0,
+    "deaths": 0,
+    "cleared": 0,
+    "gc_b": 0,
+    "tfh": 0,
+    "presenting": 7,
+    "memory": 0,
+    "plasma": 0,
+    "antibodies": 0,
+    "states": {
+      "resting": 20,
+      "presenting": 5,
+      "activated": 29,
+      "naive": 41,
+      "pre_tfh": 5
+    },
+    "types": {
+      "LEC": 3,
+      "FDC": 6,
+      "MAC": 6,
+      "DC": 5,
+      "FRC": 5,
+      "B": 46,
+      "CD4": 29
+    },
+    "pools": {
+      "degraded": 114,
+      "surface_pmhc": 7,
+      "fdc_retained": 35,
+      "native_cargo": 1,
+      "internalized": 1,
+      "free_native": 2
+    },
+    "antigen_input": 160,
+    "antigen_accounted": 160,
+    "decisions": 0
+  },
+  "mismatch": {
+    "live": 100,
+    "initial": 100,
+    "net_births": 0,
+    "deaths": 0,
+    "cleared": 0,
+    "gc_b": 0,
+    "tfh": 0,
+    "presenting": 11,
+    "memory": 0,
+    "plasma": 0,
+    "antibodies": 0,
+    "states": {
+      "resting": 20,
+      "presenting": 5,
+      "activated": 30,
+      "naive": 45
+    },
+    "types": {
+      "LEC": 3,
+      "FDC": 6,
+      "MAC": 6,
+      "DC": 5,
+      "FRC": 5,
+      "B": 46,
+      "CD4": 29
+    },
+    "pools": {
+      "degraded": 121,
+      "surface_pmhc": 11,
+      "fdc_retained": 27,
+      "processed_peptide": 1
+    },
+    "antigen_input": 160,
+    "antigen_accounted": 160,
+    "decisions": 0
+  },
+  "no_fdc": {
+    "live": 100,
+    "initial": 100,
+    "net_births": 0,
+    "deaths": 0,
+    "cleared": 0,
+    "gc_b": 0,
+    "tfh": 5,
+    "presenting": 5,
+    "memory": 0,
+    "plasma": 2,
+    "antibodies": 91,
+    "states": {
+      "resting": 20,
+      "presenting": 5,
+      "activated": 28,
+      "naive": 36,
+      "plasma": 2,
+      "pre_tfh": 4,
+      "tfh": 5
+    },
+    "types": {
+      "LEC": 3,
+      "FDC": 6,
+      "MAC": 6,
+      "DC": 5,
+      "FRC": 5,
+      "B": 46,
+      "CD4": 29
+    },
+    "pools": {
+      "degraded": 133,
+      "free_native": 21,
+      "surface_pmhc": 5,
+      "native_cargo": 1
+    },
+    "antigen_input": 160,
+    "antigen_accounted": 160,
+    "decisions": 0
+  }
+}

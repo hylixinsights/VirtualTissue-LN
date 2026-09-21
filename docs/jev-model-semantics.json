@@ -1,0 +1,27 @@
+{
+  "states": {
+    "naive": "Naive",
+    "activated": "Antigen activated",
+    "pre_tfh": "Border helper",
+    "tfh": "T follicular helper",
+    "founder": "GC founder",
+    "dz": "GC \u00b7 dark zone",
+    "lz": "GC \u00b7 light zone",
+    "selected": "GC \u00b7 selected",
+    "memory": "Memory B",
+    "plasmablast": "Plasmablast",
+    "plasma": "Plasma cell",
+    "resting": "Resting",
+    "presenting": "Antigen presenting",
+    "apoptotic": "Apoptotic",
+    "cleared": "Cleared",
+    "divided": "Replaced by daughters"
+  },
+  "eligibility": "Every listed option has already passed the kernel prerequisites for this cell. An omitted option is forbidden. Do not invent additional global prerequisites or require a second approval to use an eligible cellular program.",
+  "licenses": "help_until is the absolute expiry time in minutes of cognate T-cell help. division_budget is the finite count of cell cycles licensed by that help, not money or an API budget.",
+  "dark_zone": "dz denotes a germinal-center B cell in the proliferative program. DIVIDE starts its licensed cell cycle; the kernel owns the clock, collision checks, finite resources and creation of two daughters.",
+  "selection": "lz denotes the antigen-capture/selection phase. selected means this individual GC B cell has already obtained renewed cognate help. Eligible outputs are recycling into the proliferative phase, memory commitment, or plasmablast commitment. No particular output is mandated.",
+  "movement_and_wait": "MOVE is physical migration or scanning during one time step; WAIT starts no new program. Neither action starts a cell cycle nor commits a differentiation program.",
+  "output": "PLASMA starts plasmablast commitment, MATURE starts its transition to a mature plasma cell. SECRETE is antibody secretion by that clone. MEMORY starts the memory program without constitutive secretion.",
+  "scope": "These are definitions of the implemented toy model, not measured human rates. Choose using this individual cell state and its local context; do not optimize a requested demonstration outcome."
+}

@@ -1,0 +1,172 @@
+{
+  "version": "0.2.0",
+  "sources": {
+    "manual": {
+      "title": "Lymph Node Simulation Biological Manual",
+      "version": "1.0",
+      "date": "2026-09-21",
+      "file": "docs/BIOLOGICAL_MANUAL.md",
+      "sha256": "7839640cc617bdb65649c2a7f7a2478db734afb5bb768e424f179cc39fe12ac6"
+    },
+    "architecture_reference": "https://github.com/hylixinsights/VirtualTissue",
+    "typesafe": {
+      "checked": "2026-09-21",
+      "api": "https://docs.typesafe.ai/api",
+      "choice": "https://docs.typesafe.ai/primitives/choice",
+      "cookbook": "https://docs.typesafe.ai/cookbooks/function_calling"
+    },
+    "renderer": {
+      "name": "Three.js",
+      "version": "0.180.0",
+      "license": "MIT",
+      "url": "https://github.com/mrdoob/three.js/tree/r180"
+    }
+  },
+  "parameters": {
+    "radius_um": 150.0,
+    "cell_radius_um": 4.2,
+    "step_min": 30,
+    "movement_um": 9,
+    "sensing_um": 42,
+    "contact_um": 15,
+    "processing_min": 60,
+    "loading_min": 30,
+    "priming_min": 60,
+    "helper_min": 120,
+    "help_min": 30,
+    "help_lifetime_min": 1440,
+    "founder_min": 240,
+    "gc_organization_min": 120,
+    "gc_founders": 2,
+    "division_min": 240,
+    "differentiation_min": 180,
+    "selection_timeout_min": 1440,
+    "pmhc_lifetime_min": 360,
+    "antigen_lifetime_min": 5760,
+    "max_cells": 600,
+    "max_rounds": 120,
+    "selection_divisions": 1
+  },
+  "registry": {
+    "B": {
+      "label": "B cell",
+      "manual": "B-01",
+      "color": "#7e8eff",
+      "count": 140
+    },
+    "CD4": {
+      "label": "CD4 T cell",
+      "manual": "T-01",
+      "color": "#52d6b1",
+      "count": 85
+    },
+    "DC": {
+      "label": "cDC2",
+      "manual": "D-02",
+      "color": "#ffb75e",
+      "count": 15
+    },
+    "MAC": {
+      "label": "Macrophage",
+      "manual": "M-01 / M-03",
+      "color": "#ea829e",
+      "count": 16
+    },
+    "FDC": {
+      "label": "Follicular dendritic cell",
+      "manual": "S-03",
+      "color": "#d3a0fa",
+      "count": 16
+    },
+    "FRC": {
+      "label": "Reticular stromal cell",
+      "manual": "S-01",
+      "color": "#8eabbc",
+      "count": 18
+    },
+    "LEC": {
+      "label": "Lymphatic endothelial cell",
+      "manual": "S-06",
+      "color": "#78999d",
+      "count": 10
+    }
+  },
+  "initial_cells": 300,
+  "actions": {
+    "WAIT": [
+      "Observe; start no new program.",
+      "LN-R030"
+    ],
+    "MOVE": [
+      "Move continuously along a local cue or scan; collision checked.",
+      "LN-R003"
+    ],
+    "CAPTURE": [
+      "Acquire one accessible cognate native antigen packet.",
+      "LN-R005"
+    ],
+    "RETAIN": [
+      "Retain a local immune complex on an FDC.",
+      "LN-R005"
+    ],
+    "PROCESS": [
+      "Start timed antigen processing, then peptide loading.",
+      "LN-R007"
+    ],
+    "PRIME": [
+      "Maintain a cognate DC contact with costimulation to prime CD4.",
+      "LN-R009"
+    ],
+    "HELPER": [
+      "Start the activated CD4 border-helper program.",
+      "LN-R011"
+    ],
+    "HELP": [
+      "Maintain a local, linked B\u2013helper contact; finite license.",
+      "LN-R011"
+    ],
+    "ENTER_GC": [
+      "Start a timed founder program near follicular support.",
+      "LN-R013"
+    ],
+    "DIVIDE": [
+      "Spend one division license and complete a timed cell cycle.",
+      "LN-R021"
+    ],
+    "RECYCLE": [
+      "Use renewed help to return to the proliferative program.",
+      "LN-R016"
+    ],
+    "MEMORY": [
+      "Commit to memory; no constitutive antibody secretion.",
+      "LN-R019"
+    ],
+    "PLASMA": [
+      "Commit to antibody-secreting plasmablast differentiation.",
+      "LN-R012"
+    ],
+    "MATURE": [
+      "Mature a plasmablast into a noncycling plasma cell.",
+      "LN-R020"
+    ],
+    "SECRETE": [
+      "Secrete antibody of the existing clone and isotype.",
+      "LN-R026"
+    ],
+    "CLEAR": [
+      "Engulf one adjacent apoptotic cell into a finite debris queue.",
+      "LN-R025"
+    ],
+    "MAINTAIN": [
+      "Maintain local stromal support for follicular programs.",
+      "LN-R026"
+    ]
+  },
+  "scenario": {
+    "label": "Protein antigen + adjuvant",
+    "antigen": true,
+    "hla_match": true,
+    "cd40": true,
+    "fdc": true
+  }
+}

@@ -1,0 +1,21 @@
+const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
+import {fileURLToPath} from 'node:url';
+const root=fileURLToPath(new URL('../',import.meta.url));
+const browser=await chromium.launch({channel:'chrome',headless:true});const page=await browser.newPage({viewport:{width:1512,height:982},deviceScaleFactor:1});const errors=[];page.on('pageerror',e=>errors.push(String(e)));page.on('console',msg=>{if(msg.type()==='error')errors.push(msg.text());});
+await page.goto('http://127.0.0.1:8010');await page.locator('#loading').waitFor({state:'hidden'});page.on('dialog',d=>d.accept());await page.click('#reset');await page.waitForFunction(()=>document.querySelector('#time').textContent==='0.0 h');await page.screenshot({path:root+'docs/studio.png'});console.log({cells:await page.locator('#metricLive').textContent(),badge:await page.locator('#providerBadge').textContent(),errors});
+await page.click('#step');await page.waitForFunction(()=>document.querySelector('#time').textContent==='0.5 h');await page.click('#top');await page.click('#zones');await page.click('#zones');await page.click('[data-kind="B"]');await page.click('#clearFilter');await page.click('#about');await page.locator('#notes').waitFor({state:'visible'});await page.click('#closeNotes');
+await page.setViewportSize({width:390,height:844});await page.screenshot({path:root+'docs/mobile.png',fullPage:true});const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);console.log({afterStep:await page.locator('#time').textContent(),mobileOverflow:overflow,errors});
+await page.setViewportSize({width:1512,height:982});
+await page.locator('#import').setInputFiles(root+'recordings/demo-fixture.ln.json.gz');
+await page.locator('#replay').waitFor({state:'visible',timeout:60000});
+await page.locator('#seek').fill('60');await page.locator('#seek').dispatchEvent('input');
+await page.waitForFunction(()=>document.querySelector('#time').textContent==='30.0 h');
+if(await page.locator('#stageTitle').textContent()!=='The germinal-center response')throw new Error('Recorded GC missing');
+const bounds=await page.locator('#scene').boundingBox();
+for(const [x,y] of [[.44,.45],[.5,.5],[.55,.55],[.4,.6]]){await page.mouse.click(bounds.x+bounds.width*x,bounds.y+bounds.height*y);if(await page.locator('.cell-name').count())break;}
+await page.screenshot({path:root+'docs/germinal-center.png'});
+await page.click('#leaveReplay');await page.waitForFunction(()=>document.querySelector('#providerBadge').textContent.includes('demonstration'));
+const denied=await page.evaluate(async()=>({key:(await fetch('/.env')).status,source:(await fetch('/engine.py')).status,mutation:(await fetch('/api/step',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'})).status}));
+console.log({replay:'passed',denied});
+if(denied.key!==404||denied.source!==404||denied.mutation!==403)throw new Error('Access boundary failed');
+if(errors.filter(e=>!e.includes('404')&&!e.includes('403')).length||overflow)throw new Error('Browser validation failed');await browser.close();

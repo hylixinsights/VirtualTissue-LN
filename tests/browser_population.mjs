@@ -1,0 +1,16 @@
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+import {fileURLToPath} from 'node:url';
+const root=fileURLToPath(new URL('../',import.meta.url));
+const browser=await chromium.launch({channel:'chrome',headless:true});const page=await browser.newPage({viewport:{width:1512,height:982}});const errors=[];page.on('pageerror',e=>errors.push(String(e)));page.on('dialog',d=>d.accept());
+await page.goto('http://127.0.0.1:8011');await page.locator('#loading').waitFor({state:'hidden'});
+if(await page.locator('#metricLive').textContent()!=='100')throw new Error('Wrong initial population');
+if(await page.locator('#diameter').textContent()!=='173.2 μm')throw new Error('Incorrect compact radius');
+await page.screenshot({path:root+'docs/studio-100.png'});
+await page.locator('#population').selectOption('300');await page.click('#reset');await page.waitForFunction(()=>document.querySelector('#metricLive').textContent==='300');
+await page.locator('#population').selectOption('100');await page.click('#reset');await page.waitForFunction(()=>document.querySelector('#metricLive').textContent==='100');
+await page.click('#step');await page.waitForFunction(()=>document.querySelector('#time').textContent==='0.5 h');
+await page.click('#pulse');await page.waitForFunction(()=>document.querySelector('#notice').textContent.startsWith('27 additional'));
+await page.setViewportSize({width:390,height:844});await page.screenshot({path:root+'docs/mobile-100.png',fullPage:true});
+if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth))throw new Error('Mobile overflow');
+console.log({populationPresets:'100 and 300 passed',compactDiameter:'173.2 um',pulse:'27 packets',errors});
+if(errors.length)throw new Error('Browser errors');await browser.close();
