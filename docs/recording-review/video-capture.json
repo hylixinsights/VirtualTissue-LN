@@ -1,0 +1,89 @@
+{
+  "bytes": 62473270,
+  "seconds": 150,
+  "width": 1920,
+  "height": 1080,
+  "mime": "video/mp4;codecs=avc1.420028",
+  "encodedDuration": 149.99123333333333,
+  "videoSha256": "4d7c08a238f05625af6f335cefc84b3fea5a6321a938630a16ccf39954bfae1a",
+  "recordingSha256": "3604242276b4c69fe2ef131ecc6988d83cd650d8f2be0ccdc2827ee50b52b566",
+  "requests": 5000,
+  "status": "budget_reached",
+  "preview": false,
+  "chapters": [
+    {
+      "title": "DC entry",
+      "description": "One dendritic cell brings nine finite antigen packets into a quiet tissue.",
+      "time": 0,
+      "cell": "LN-0121"
+    },
+    {
+      "title": "T-cell priming",
+      "description": "A compatible local DC–CD4 contact starts a timed priming program.",
+      "time": 240,
+      "cell": "LN-0095"
+    },
+    {
+      "title": "Border helper",
+      "description": "The primed CD4 cell acquires a border-helper program.",
+      "time": 420,
+      "cell": "LN-0095"
+    },
+    {
+      "title": "Linked B–T help",
+      "description": "A local cognate B–helper contact can license B-cell output.",
+      "time": 1100,
+      "cell": "LN-0030"
+    },
+    {
+      "title": "Help completed",
+      "description": "Linked help completes; the helper becomes Tfh. B-cell fates remain individual choices.",
+      "time": 1130,
+      "cell": "LN-0030"
+    },
+    {
+      "title": "Germinal center",
+      "description": "Qualified founders and timed organization create a local GC.",
+      "time": 1750,
+      "cell": "LN-0004"
+    },
+    {
+      "title": "Plasmablast",
+      "description": "One helped B cell completes plasmablast differentiation.",
+      "time": 1770,
+      "cell": "LN-0080"
+    },
+    {
+      "title": "First IgM output",
+      "description": "After differentiation, the antibody-producing cell starts releasing its clone’s IgM output.",
+      "time": 1770,
+      "cell": "LN-0080"
+    },
+    {
+      "title": "Cell division",
+      "description": "Two daughters replace one parent. Their recorded lineage and clone are preserved.",
+      "time": 1990,
+      "cell": "LN-0122"
+    },
+    {
+      "title": "Plasma cell",
+      "description": "The plasmablast matures into a plasma cell and continues secreting IgM.",
+      "time": 2130,
+      "cell": "LN-0080"
+    },
+    {
+      "title": "Failed GC selection",
+      "description": "Unsuccessful GC cells undergo apoptosis. These outcomes remain in the recording.",
+      "time": 3430,
+      "cell": "LN-0122"
+    },
+    {
+      "title": "GC resolution",
+      "description": "The local GC resolves after failed selection; the plasma cell continues output.",
+      "time": 4160,
+      "cell": null
+    }
+  ],
+  "errors": [],
+  "forbidden": []
+}

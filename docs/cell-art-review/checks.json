@@ -1,0 +1,27 @@
+{
+  "browser": "Headless Chrome on this Windows computer",
+  "measurements": [
+    {
+      "population": 100,
+      "medianFrameMs": 6.9,
+      "p95FrameMs": 7.1
+    },
+    {
+      "population": 300,
+      "medianFrameMs": 7,
+      "p95FrameMs": 7
+    }
+  ],
+  "kernelUnchanged": true,
+  "stableSelection": [
+    "B",
+    "CD4",
+    "DC"
+  ],
+  "poses": 8,
+  "pausedPixelDelta": 0,
+  "mobileOverflow": false,
+  "reducedMotion": true,
+  "missingArtworkFallback": true,
+  "errors": []
+}

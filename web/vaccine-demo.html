@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vaccine to antibody · VirtualTissue LN</title><link rel="icon" href="./icon.svg"><link rel="stylesheet" href="./vaccine-demo.css"><script type="module" src="./vaccine-demo.mjs"></script></head>
+<body>
+<header><a class="brand" href="../"><span>◉</span> VirtualTissue <i>/</i> Lymph node</a><div><span class="mode">Scripted demonstration · no AI calls</span><a href="../">Tissue studio ↗</a></div></header>
+<main>
+ <div class="introduction"><div><p class="eyebrow">A VACCINE RESPONSE, ONE CELL AT A TIME</p><h1>From antigen to antibody.</h1></div><p>Follow a dendritic cell, a CD4 helper and one B-cell clone through an unfolding response.</p></div>
+ <div class="experience">
+  <section class="tissue-panel" aria-label="Animated lymph-node tissue">
+   <div class="scene-toolbar"><span><i class="live-dot"></i><b id="playState">Loading the tissue</b></span><div class="view-controls"><button id="focus" aria-pressed="true">Follow response</button><button id="overview" aria-pressed="false">Whole tissue</button></div></div>
+   <div class="scene-wrap"><canvas id="vaccineScene" role="img" aria-label="Animated 100-cell lymph-node tissue showing a scripted vaccination response"></canvas><div id="sceneLoading" role="status">Preparing the vaccine response…</div><div class="scene-corner"><span id="clock">0.0 h</span><small>MODEL TIME · COMPRESSED</small></div><div class="scene-key"><span class="antigen-key">● Native antigen</span><span class="peptide-key">▰ Peptide–MHC II</span><span class="antibody-key">✣ IgM output</span></div></div>
+   <div class="playback"><button id="playStory" class="primary" disabled>▶ Play response</button><button id="restart" title="Replay from the initial vaccine pulse" disabled>↺ Restart</button><label>Speed <select id="speed" aria-label="Playback speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option></select></label><span id="elapsed">0:00 / 1:16</span></div>
+   <label class="seek-label" for="storySeek">Response timeline</label><input id="storySeek" type="range" min="0" max="76" step="0.05" value="0" aria-label="Response timeline" disabled>
+   <nav id="chapters" aria-label="Response stages"></nav>
+  </section>
+  <aside class="narrative">
+   <div class="step-number"><span id="stageNumber">01 / 08</span><span>CAUSAL SEQUENCE</span></div>
+   <h2 id="stageTitle">Vaccine antigen arrives</h2><p id="stageDescription">Loading the scripted cell decisions…</p>
+   <div class="decision"><span class="eyebrow">SCRIPTED CELL DECISION</span><strong id="decisionAction">LOCAL INPUT</strong><span id="decisionCell">Dendritic cell</span><div class="progress-line"><i id="stageProgress"></i></div><small id="decisionDetail">Local observations · eligible actions · timed execution</small></div>
+   <div class="actors" id="actors" aria-label="Inspect the response cells"></div>
+   <div class="output"><div><span>ANTIBODY OUTPUT</span><strong id="antibodyCount">0</strong><small>arbitrary secretion units · IgM</small></div><svg width="58" height="58" viewBox="0 0 58 58" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M29 27v-9m0 0-5-5m5 5 5-5"/><path d="M29 27v-9m0 0-5-5m5 5 5-5" transform="rotate(72 29 29)"/><path d="M29 27v-9m0 0-5-5m5 5 5-5" transform="rotate(144 29 29)"/><path d="M29 27v-9m0 0-5-5m5 5 5-5" transform="rotate(216 29 29)"/><path d="M29 27v-9m0 0-5-5m5 5 5-5" transform="rotate(288 29 29)"/></g></svg></div>
+   <p class="scope">A deliberately favorable, scripted pathway in a 100-cell LN patch. Timings are proposed model assumptions; animation is illustrative.</p>
+  </aside>
+ </div>
+ <details class="model-notes"><summary>What drives this demonstration?</summary><div><p>Each recorded round uses the existing LN kernel: local antigen access, receptor matching, costimulation, physical contact, processing clocks and finite help. Two finite antigen packets challenge an already neighboring cognate DC–CD4–B trio. All nonparticipating cells choose WAIT. The scripted B-cell policy favors the eligible plasmablast route.</p><p>The DC primes CD4; the B cell captures native antigen and presents its own peptide to the helper. The same B cell then differentiates and secretes IgM. Antibody icons illustrate recorded secretion units, not individual molecule counts. This is an extrafollicular output demonstration, not germinal-center maturation or a prediction of vaccine efficacy.</p><p>No Jev calls are made. A future Jev preference policy can be tested separately against the same eligibility rules; this playback does not change Jev probabilities.</p><a href="./vaccine-story.json" download>Download the scripted trace ↗</a></div></details>
+</main><footer>CONCEIVED BY HELDER NAKAYA <span>CSBL · Hylix.app · VirtualTissue</span></footer>
+</body></html>

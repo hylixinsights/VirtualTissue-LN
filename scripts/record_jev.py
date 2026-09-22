@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import sys
 import threading
+import time
 import uuid
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from engine import Simulation,SCENARIOS
@@ -20,7 +21,14 @@ def atomic_json(path,data,compressed=False):
  opener=gzip.open if compressed else open
  kwargs={'compresslevel':3} if compressed else {}
  with opener(tmp,'wt',encoding='utf-8',**kwargs) as f:json.dump(data,f,allow_nan=False,separators=(',',':'))
- os.chmod(tmp,0o600);os.replace(tmp,path)
+ os.chmod(tmp,0o600)
+ # Windows readers/scanners can briefly deny replacement. This retries only the
+ # local rename of already-written bytes; it never repeats an inference request.
+ for attempt in range(8):
+  try:os.replace(tmp,path);break
+  except PermissionError:
+   if attempt==7:raise
+   time.sleep(min(.025*2**attempt,.4))
 
 class Recorder:
  def __init__(self,folder,provider,rounds,scenarios,seed,initial_cells=300,resume=False,extend=False,stop_on_demo=False):

@@ -6,6 +6,12 @@ The existing `hylixinsights/VirtualTissue` repository remains the only publisher
 
 ## Build the public player
 
+The current reactive recorder and timeline player are documented in
+[CONTINUOUS_RECORDING.md](CONTINUOUS_RECORDING.md). When a reviewed
+`recordings/examples/reactive-index.json` is present, the default build below uses
+that example. `python scripts/build_site.py --legacy` retains the earlier memory
+B-cell example described later in this document.
+
 ```sh
 python3 scripts/build_site.py
 python3 -m http.server 8020 --bind 127.0.0.1 --directory site
@@ -19,7 +25,7 @@ The reviewed example contains actual Jev responses. The local default simulation
 
 ```sh
 python3 -m unittest discover -s tests -q
-node tests/browser_static.mjs
+node tests/browser_reactive_replay.mjs
 python3 scripts/package_release.py
 ```
 

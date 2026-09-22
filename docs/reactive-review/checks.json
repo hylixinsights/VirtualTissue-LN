@@ -1,0 +1,53 @@
+{
+  "baseline_decisions": 0,
+  "final": {
+    "live": 121,
+    "initial": 120,
+    "net_births": 0,
+    "deaths": 0,
+    "cleared": 0,
+    "gc_b": 2,
+    "tfh": 3,
+    "presenting": 2,
+    "memory": 0,
+    "plasma": 2,
+    "antibodies": 16,
+    "states": {
+      "resting": 25,
+      "naive": 87,
+      "plasmablast": 2,
+      "founder": 2,
+      "activated": 1,
+      "tfh": 3,
+      "presenting": 1
+    },
+    "types": {
+      "LEC": 3,
+      "FDC": 6,
+      "MAC": 6,
+      "DC": 6,
+      "FRC": 5,
+      "B": 60,
+      "CD4": 35
+    },
+    "pools": {
+      "degraded": 4,
+      "surface_pmhc": 2,
+      "dc_native": 3
+    },
+    "antigen_input": 9,
+    "antigen_accounted": 9,
+    "decisions": 124,
+    "entries": 1,
+    "never_queried": 112,
+    "busy": 2,
+    "quiet": 113,
+    "responding": 8,
+    "queried_last_step": 1
+  },
+  "paid_requests": 0,
+  "external_requests": [],
+  "errors": [],
+  "mobile_overflow": false,
+  "reduced_motion_autoplay": false
+}

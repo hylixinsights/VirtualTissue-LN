@@ -1,35 +1,35 @@
-# Gravação real Jev — 100 células
+# Actual Jev recording — 100 cells
 
-Execução de 21 de setembro de 2026, semente 21, cenário de proteína com adjuvante. Projeto independente de Gut. Tecido circular de uma camada, diâmetro 173,2 μm, visualização 3D. Modelo retornado: `jev-1.13.0`.
+Run on 21 September 2026, seed 21, protein/adjuvant scenario. Independent of the Gut project. Circular monolayer, 173.2 μm diameter, 3D visualization. Returned model: `jev-1.13.0`.
 
-## Resultado observado
+## Observed outcome
 
-- 89 rodadas completas: **44,5 horas simuladas**, de uma meta de 45 horas.
-- **8.463 decisões individuais reais do Jev**, com observações e opções locais registradas.
-- Centro germinativo estabelecido aos 1.350 minutos (22,5 h), com quatro fundadores. Ao final: **16 B de GC**, 6 Tfh e 7 células apresentando pMHC.
-- 100 células vivas ao final; nenhuma divisão ou morte. Nenhuma célula de memória, plasmócito ou secreção de anticorpos nesta execução.
-- Todos os 160 pacotes de antígeno permanecem contabilizados, inclusive os degradados.
+- 89 complete rounds: **44.5 simulated hours** out of a 45-hour target.
+- **8,463 actual individual Jev decisions**, with local observations and options recorded.
+- Germinal center established at 1,350 minutes (22.5 h), with four founders. Final state: **16 GC B cells**, 6 Tfh and 7 cells displaying pMHC.
+- 100 living cells at completion; no division or death. No memory cells, plasma cells or antibody secretion occurred in this run.
+- All 160 antigen packets remain accounted for, including degraded packets.
 
-Os relógios, proporções e critérios de GC são propostos e não calibrados. Este resultado não prevê o comportamento de um linfonodo humano. Rotas de divisão, memória e plasma existem no código e foram alcançadas por testes sintéticos, mas não devem ser atribuídas a esta gravação Jev.
+Clocks, proportions and GC criteria are proposed and uncalibrated. This result does not predict the behavior of a human lymph node. Division, memory and plasma routes exist in the code and were reached in synthetic tests, but must not be attributed to this Jev recording.
 
-## Consumo e parada
+## Usage and stopping condition
 
-Foram feitas **447 tentativas HTTP**, sob teto de 450. Uma rodada completa adicional exigiria cinco chamadas; por isso a gravação permanece honestamente marcada como **parcial**. Não foram gastas as três chamadas restantes em uma rodada incompleta.
+There were **447 HTTP attempts**, under a cap of 450. Another complete round required five calls, so the recording remains honestly marked **partial**. The three remaining calls were not spent on an incomplete round.
 
-Uso informado pelo serviço: **14.237.357 tokens de entrada** e **294.834 de saída**. Pela tarifa de US$ 0,042 por milhão de tokens de entrada e saída gratuita mostrada na captura fornecida pelo usuário, o consumo conhecido estimado é **US$ 0,597968994**, aproximadamente **US$ 0,60**. Uma requisição HTTP 400 não informou uso; eventual cobrança dela não está incluída. O saldo atual da conta não foi consultado.
+The service reported **14,237,357 input tokens** and **294,834 output tokens**. At the US$0.042 per million input tokens and free output shown in the user-supplied price screenshot, estimated known cost was **US$0.597968994**, approximately **US$0.60**. One HTTP 400 request reported no usage; any charge for it is excluded. The current account balance was not queried.
 
-## Revisões do protocolo
+## Protocol reviews
 
-1. Distribuições arredondadas a duas casas: normalização apenas dentro do limite de arredondamento, sem alterar a escolha. Dez decisões aplicadas têm esse ajuste documentado e preservam os valores originais.
-2. HTTP 400: causa original não confirmada, pois a primeira versão não preservava o corpo do erro. O lote rejeitado era o maior; o formato de tabelas locais reduziu seu tamanho em 38%, sem perder informações. A retomada funcionou e agora os erros HTTP são registrados.
-3. Na tentativa 369, Jev escolheu MOVE (0,42), embora WAIT tivesse 0,43. A resposta inteira foi rejeitada e preservada no histórico; após revisão explícita, apenas esse lote foi solicitado novamente.
+1. Distributions rounded to two decimals: normalization only within the rounding bound, without changing the choice. Ten applied decisions have this adjustment documented and retain their original values.
+2. HTTP 400: the original cause was not confirmed because the first version did not preserve the error body. The rejected batch was the largest; lossless local tables reduced its size by 38%. Resuming succeeded, and HTTP error details are now retained.
+3. On attempt 369, Jev chose MOVE (0.42) while WAIT had 0.43. The entire response was rejected and preserved in the audit. After explicit review, only that batch was requested again.
 
-Não houve repetição automática, decisão sintética substituta ou alteração retroativa de decisões. Respostas válidas já pagas foram reutilizadas nas retomadas. O formato v1 foi usado no início; v2 usa tabelas sem perda de informação. Essa mudança de formato é parte da proveniência da execução.
+There were no automatic retries, synthetic fallback decisions or retroactive decision changes. Already-paid valid responses were reused on resume. Format v1 was used initially; v2 uses lossless tables. This format change is part of the run provenance.
 
-## Abrir e verificar
+## Open and verify
 
-Com o servidor local ativo: [abrir a gravação](http://127.0.0.1:8010/?recording=940f891b6407c4a24371). Também está no menu **Saved Jev examples**. A reprodução e a inspeção não fazem chamadas pagas.
+With the local server running, [open the recording](http://127.0.0.1:8010/?recording=940f891b6407c4a24371), also available under **Saved Jev examples**. Playback and inspection make no paid calls.
 
-Arquivo: `recordings/private/jev-20260921-103901-2321f0/vaccine.ln.json.gz`. O mesmo diretório contém `summary.json` e o histórico incremental `audit.jsonl`.
+File: `recordings/private/jev-20260921-103901-2321f0/vaccine.ln.json.gz`. The same directory contains `summary.json` and the incremental `audit.jsonl` history.
 
-A conferência reconstruiu todas as 89 rodadas a partir das decisões registradas e obteve estado final exatamente igual. Verificou cobertura de todas as células elegíveis, invariantes físicos, conservação de antígeno e soma dos tokens do histórico. Resultados em `live-verification.json`; a suíte tem 45 testes sintéticos aprovados.
+Verification reconstructed all 89 rounds from recorded decisions and obtained an exactly matching final state. It checked coverage of eligible cells, physical invariants, antigen conservation and audit token sums. Results are in `live-verification.json`; the 45 synthetic tests available at that review passed.

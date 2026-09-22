@@ -23,10 +23,10 @@
     }
   },
   "parameters": {
-    "radius_um": 150.0,
+    "radius_um": 135.0,
     "cell_radius_um": 4.2,
-    "step_min": 30,
-    "movement_um": 9,
+    "step_min": 10,
+    "movement_um": 3,
     "sensing_um": 42,
     "contact_um": 15,
     "processing_min": 60,
@@ -41,10 +41,10 @@
     "division_min": 240,
     "differentiation_min": 180,
     "selection_timeout_min": 1440,
-    "pmhc_lifetime_min": 360,
+    "pmhc_lifetime_min": 720,
     "antigen_lifetime_min": 5760,
-    "max_cells": 600,
-    "max_rounds": 120,
+    "max_cells": 150,
+    "max_rounds": 180,
     "selection_divisions": 1
   },
   "registry": {
@@ -52,46 +52,46 @@
       "label": "B cell",
       "manual": "B-01",
       "color": "#7e8eff",
-      "count": 140
+      "count": 60
     },
     "CD4": {
       "label": "CD4 T cell",
       "manual": "T-01",
       "color": "#52d6b1",
-      "count": 85
+      "count": 35
     },
     "DC": {
       "label": "cDC2",
       "manual": "D-02",
       "color": "#ffb75e",
-      "count": 15
+      "count": 5
     },
     "MAC": {
       "label": "Macrophage",
       "manual": "M-01 / M-03",
       "color": "#ea829e",
-      "count": 16
+      "count": 6
     },
     "FDC": {
       "label": "Follicular dendritic cell",
       "manual": "S-03",
       "color": "#d3a0fa",
-      "count": 16
+      "count": 6
     },
     "FRC": {
       "label": "Reticular stromal cell",
       "manual": "S-01",
       "color": "#8eabbc",
-      "count": 18
+      "count": 5
     },
     "LEC": {
       "label": "Lymphatic endothelial cell",
       "manual": "S-06",
       "color": "#78999d",
-      "count": 10
+      "count": 3
     }
   },
-  "initial_cells": 300,
+  "initial_cells": 120,
   "actions": {
     "WAIT": [
       "Observe; start no new program.",
@@ -163,10 +163,25 @@
     ]
   },
   "scenario": {
-    "label": "Protein antigen + adjuvant",
-    "antigen": true,
+    "label": "Quiet baseline",
+    "antigen": false,
     "hla_match": true,
     "cd40": true,
     "fdc": true
-  }
+  },
+  "reactive": {
+    "version": "ln-local-response-v1",
+    "decision_interval_min": 60,
+    "motility_min": 60,
+    "motility_speed_um_min": 0.3,
+    "native_sensing_um": 28,
+    "presentation_sensing_um": 36,
+    "entry_min": 30,
+    "antigen_packets": 9,
+    "site_spacing_um": 20,
+    "radius_at_120_um": 135,
+    "decision_contract": "Only locally stimulated, non-busy, due cells with an executable action are queried.",
+    "evidence": "P: uncalibrated demonstration assumptions; not measured human rates."
+  },
+  "entries": 0
 }

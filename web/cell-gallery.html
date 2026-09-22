@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cell atlas in motion · VirtualTissue</title>
+  <link rel="icon" href="./icon.svg"><link rel="stylesheet" href="./cell-gallery.css">
+  <script type="module" src="./cell-gallery.mjs"></script>
+</head>
+<body>
+  <header><a class="brand" href="../"><span>◉</span> VirtualTissue <i>/</i> Lymph node</a><a href="../">Open the tissue <span aria-hidden="true">↗</span></a></header>
+  <main>
+    <div class="intro"><div><p class="eyebrow">VISUAL STUDY 01 · CELL ILLUSTRATIONS</p><h1>A tissue begins<br>with its cells.</h1></div><p class="lead">Your cell artwork, in motion.<br>Eight poses per cell, connected by smooth transitions. A visual direction for the virtual LN.</p></div>
+    <section class="motion-controls" aria-label="Animation controls">
+      <button id="motion" aria-pressed="true">Pause motion</button>
+      <label for="speed">Visual speed <select id="speed"><option value=".5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label>
+      <label class="frame-control" for="pose">Explore poses <input id="pose" type="range" min="0" max="7" value="0" step="1"><output id="poseLabel" for="pose">1 / 8</output></label>
+    </section>
+    <div id="loadStatus" role="status">Loading cell illustrations…</div>
+    <section id="gallery" class="gallery" aria-label="Four cell types"></section>
+    <footer><div><span class="eyebrow">READING THIS PREVIEW</span><p>Motion is illustrative. Poses do not represent biological time, migration, contact or activation. In the tissue, cell centers and events are determined by the simulator.</p></div><div><span class="eyebrow">FROM ARTWORK TO THE MODEL</span><p>Brown B cells and yellow T cells are proposed visual assignments. Original images are preserved, including small edge artifacts. This gallery adds no cell types to the biological model.</p></div></footer>
+  </main>
+</body>
+</html>

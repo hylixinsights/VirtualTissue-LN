@@ -30,7 +30,7 @@ def pack_observation(observation):
    columns=list(values[0]);packed[field]={'columns':columns,'rows':[[v[k] for k in columns] for v in values]}
  return packed
 
-def request_body(rows,model,biological_context=False,fate_context=False):
+def request_body(rows,model,biological_context=False,fate_context=False,plasmablast_context=False,development_context=False):
  body=request_body_v1(rows,model)
  body['state']['table_format']='In each local observation, a columns/rows object is a lossless table: each row supplies values in the named column order. Empty arrays mean no observed entities.'
  for r in rows:body['questions'][r['id']]['instructions']['local_observation']=pack_observation(r['observation'])
@@ -54,6 +54,23 @@ def request_body(rows,model,biological_context=False,fate_context=False):
     'MEMORY':'Preserve this already selected, antigen-experienced B clone as a quiescent memory cell. Under this proposed policy, local scarcity of cognate native antigen supports this alternative to further antigen-dependent cycling. No constitutive antibody secretion.',
     'PLASMA':'Commit this helped B cell to the antibody-secreting plasmablast program. This trades further GC cycling for antibody output by its existing clone and specificity; consider its current help and local antigen context.'}.items():
     if action in q['criteria']:q['criteria'][action]['description']=description
+ for r in rows:
+  if r['observation'].get('movement_program') and 'MOVE' in body['questions'][r['id']]['criteria']:
+   body['questions'][r['id']]['criteria']['MOVE']['description']=r['observation']['movement_program']
+ if plasmablast_context:
+  for r in rows:
+   q=body['questions'][r['id']];cell=r['observation'].get('cell',{})
+   if cell.get('kind')!='B':continue
+   if 'PLASMA' in q['criteria']:
+    q['instructions']['proposed_local_policy']='Explicit user-selected antibody-output demonstration policy, P: uncalibrated. This individual B cell has already passed the kernel prerequisites for PLASMA, including cognate help. Strongly favor its eligible plasmablast commitment over continued migration or GC founding/cycling (suggested preference 0.90). Return your own normalized preferences over the supplied legal menu. This preference is not a measured fate probability; do not invent antigen or help or change eligibility.'
+   elif 'SECRETE' in q['criteria'] and cell.get('state') in ('plasmablast','plasma'):
+    q['instructions']['proposed_local_policy']='Explicit user-selected antibody-output demonstration policy, P: uncalibrated. This differentiated antibody-producing B cell can legally secrete its existing isotype. Strongly favor SECRETE now (suggested preference 0.90); return your own normalized preferences over its legal menu. Do not change isotype or invent output; the kernel applies secretion.'
+  if any('proposed_local_policy' in q['instructions'] for q in body['questions'].values()) and 'model_semantics' in body['state']:
+   body['state']['model_semantics']['scope']='These are definitions of an uncalibrated toy model. Use only each cell’s local state and legal options. Where present, proposed_local_policy explicitly declares the user-selected demonstration preference; other cells receive no outcome instruction.'
+ if development_context:
+  body['state']['proposed_development_policy']='P: explicitly selected qualitative demonstration policy, not measured biology. Preserve individual local eligibility. For a helped activated B cell, its own toy affinity annotation at or above 0.79 favors early PLASMA commitment; below 0.79 favor eligible ENTER_GC, or MOVE toward its local stromal field until founding is eligible. This uncalibrated threshold illustrates competing fates, not a validated affinity-to-fate law. In a licensed DZ cell favor DIVIDE. In an already selected GC cell favor PLASMA after a daughter generation, otherwise eligible recycling. For a plasmablast, favor SECRETE until its own recorded output reaches three units, then favor MATURE. Mature plasma cells favor SECRETE. Recognition, help, antigen and contact gates remain mandatory; never invent omitted options or distant information. For other states use their local cues and eligible programs normally.'
+  if 'model_semantics' in body['state']:
+   body['state']['model_semantics']['scope']='Uncalibrated toy model with a disclosed competing-fate demonstration policy. Evaluate each individual using only its local observation and legal menu; no global counts or target cells are provided.'
  return body
 
 def validate(body,rows):
@@ -80,9 +97,13 @@ def validate(body,rows):
  return answers
 
 class Jev:
- def __init__(self,key=None,limit=0,model=None,transport=None,on_audit=None,biological_context=False,fate_context=False):
+ def __init__(self,key=None,limit=0,model=None,transport=None,on_audit=None,biological_context=False,fate_context=False,plasmablast_context=False,development_context=False):
   self.fate_context=fate_context;self.biological_context=biological_context;self.prompt_version='lymph-node-choice-v3-model-semantics' if biological_context else 'lymph-node-choice-v2-lossless-tables'
   if fate_context:self.prompt_version='lymph-node-choice-v4-proposed-fate-context'
+  self.plasmablast_context=plasmablast_context
+  if plasmablast_context:self.prompt_version='lymph-node-choice-v5-proposed-plasmablast-preference'
+  self.development_context=development_context
+  if development_context:self.prompt_version='lymph-node-choice-v6-proposed-development-policy'
   self.key=key or os.environ.get('TYPESAFE_API_KEY','');self.limit=limit
   self.model=model or os.environ.get('JEV_MODEL','jev-1.13.0');self.resolved_model=None
   self.requests=0;self.input_tokens=0;self.output_tokens=0;self.unknown_usage=0;self.audit=[]
@@ -101,13 +122,14 @@ class Jev:
   except (OSError,ValueError,urllib.error.URLError): raise ProviderError('Jev connection/JSON failure. Usage may be unknown; round paused.') from None
  def _notify(self,record):
   if self.on_audit: self.on_audit(record)
- def choose(self,rows,budget,workers=1):
+ def choose(self,rows,budget,workers=1,batch_size=20):
   if not self.key: raise ProviderError('Set TYPESAFE_API_KEY in this project or server environment')
   if type(workers) is not int or not 1<=workers<=4: raise ValueError('Workers must be 1–4')
-  batches=[rows[i:i+20] for i in range(0,len(rows),20)]
+  if type(batch_size) is not int or not 1<=batch_size<=20:raise ValueError('Batch size must be 1–20')
+  batches=[rows[i:i+batch_size] for i in range(0,len(rows),batch_size)]
   results={};uncached=[]
   for batch in batches:
-   fingerprint=hashlib.sha256(json.dumps(request_body(batch,self.model,self.biological_context,self.fate_context),sort_keys=True,allow_nan=False).encode()).hexdigest()
+   fingerprint=hashlib.sha256(json.dumps(request_body(batch,self.model,self.biological_context,self.fate_context,self.plasmablast_context,self.development_context),sort_keys=True,allow_nan=False).encode()).hexdigest()
    cached=self.replay_cache.get(fingerprint)
    if not cached:
     legacy=hashlib.sha256(json.dumps(request_body_v1(batch,self.model),sort_keys=True,allow_nan=False).encode()).hexdigest()
@@ -122,7 +144,7 @@ class Jev:
   batches=uncached
   if self.requests+len(batches)>min(budget,self.limit): raise ProviderError('Request budget cannot cover a full round. Export the partial run or increase the explicit budget.')
   def call(batch):
-   body=request_body(batch,self.model,self.biological_context,self.fate_context)
+   body=request_body(batch,self.model,self.biological_context,self.fate_context,self.plasmablast_context,self.development_context)
    with self._lock:
     self.requests+=1
     record={'request':self.requests,'model_requested':self.model,'cells':[r['id'] for r in batch],

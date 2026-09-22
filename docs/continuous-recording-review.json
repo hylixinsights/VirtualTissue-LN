@@ -1,0 +1,111 @@
+{
+  "format": "lymph-node-continuous-review-v1",
+  "sha256": "3604242276b4c69fe2ef131ecc6988d83cd650d8f2be0ccdc2827ee50b52b566",
+  "status": "budget_reached",
+  "model": "jev-1.13.0",
+  "requests": 5000,
+  "input_tokens": 10393684,
+  "output_tokens": 199808,
+  "unknown_usage": 0,
+  "decisions": 5000,
+  "frames": 29724,
+  "time_min": 297220,
+  "metrics": {
+    "live": 119,
+    "initial": 120,
+    "net_births": 1,
+    "deaths": 3,
+    "cleared": 0,
+    "gc_b": 0,
+    "tfh": 1,
+    "presenting": 0,
+    "memory": 0,
+    "plasma": 1,
+    "antibodies": 4922,
+    "states": {
+      "resting": 25,
+      "naive": 91,
+      "plasma": 1,
+      "tfh": 1,
+      "presenting": 1
+    },
+    "types": {
+      "LEC": 3,
+      "FDC": 6,
+      "MAC": 6,
+      "DC": 6,
+      "FRC": 5,
+      "B": 58,
+      "CD4": 35
+    },
+    "pools": {
+      "degraded": 9
+    },
+    "antigen_input": 9,
+    "antigen_accounted": 9,
+    "decisions": 5000,
+    "entries": 1,
+    "never_queried": 116,
+    "busy": 0,
+    "quiet": 117,
+    "responding": 2,
+    "queried_last_step": 1
+  },
+  "milestones": [
+    {
+      "event": "DC entry",
+      "time_min": 0,
+      "cell": "LN-0121"
+    },
+    {
+      "event": "Border helper",
+      "time_min": 420,
+      "cell": "LN-0095"
+    },
+    {
+      "event": "Linked help completed; helper becomes Tfh",
+      "time_min": 1130,
+      "cell": "LN-0030"
+    },
+    {
+      "event": "GC",
+      "time_min": 1750,
+      "cell": "LN-0004"
+    },
+    {
+      "event": "Division",
+      "time_min": 1990,
+      "cell": "LN-0030"
+    },
+    {
+      "event": "Plasmablast",
+      "time_min": 1770,
+      "cell": "LN-0080"
+    },
+    {
+      "event": "First IgM",
+      "time_min": 1770,
+      "cell": "LN-0080"
+    },
+    {
+      "event": "Plasma cell",
+      "time_min": 2130,
+      "cell": "LN-0080"
+    }
+  ],
+  "all_request_hashes_verified": true,
+  "all_choices_match_provider": true,
+  "all_visual_frames_accounted": true,
+  "daughter_lineages_verified": true,
+  "recorded_interruptions": 1,
+  "resumptions": [
+    {
+      "utc": "2026-09-22T19:16:42.290567+00:00",
+      "previous_status": "failed",
+      "requests_already_spent": 3406,
+      "round": 20163,
+      "reason": "Explicit continuation after exact saved-state reconstruction; no previous API request repeated."
+    }
+  ],
+  "policy": "Competing-fate demonstration: a proposed local affinity threshold favors early output or GC expansion; output cells can mature and secrete. Uncalibrated."
+}

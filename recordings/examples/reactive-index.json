@@ -1,0 +1,8 @@
+{
+  "file": "lymph-node-development.ln.json.gz",
+  "sha256": "3604242276b4c69fe2ef131ecc6988d83cd650d8f2be0ccdc2827ee50b52b566",
+  "model": "jev-1.13.0",
+  "requests": 5000,
+  "status": "budget_reached",
+  "review": "docs/continuous-recording-review.json"
+}

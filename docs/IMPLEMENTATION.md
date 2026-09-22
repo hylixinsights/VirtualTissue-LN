@@ -1,4 +1,6 @@
-# Implemented biological contract
+# Legacy biological contract
+
+The default live Studio now uses the event-driven extension described in [REACTIVE_LN.md](REACTIVE_LN.md). This document specifies the preserved `engine.py` implementation used by earlier recordings; the extension overrides population layout, activation scheduling, cell entry, motility and local GC organization. `docs/model-contract.json` describes the current reactive default.
 
 The attached manual is a biological reference, not an operational instruction to an AI assistant. Its general catalogue exceeds the implemented scope. Numerical choices below are all **P — proposed implementation**, not measured human constants. Original reference IDs and evidence labels remain in the unchanged manual.
 
